@@ -35,6 +35,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCategoryRepository(api: com.example.courseapp.data.remote.CategoryApi, dao: com.example.courseapp.data.local.dao.CategoryDao) =
-        CategoryRepository(api, dao)
+    fun provideCategoryRepository(
+        api: com.example.courseapp.data.remote.CategoryApi,
+        categoryDao: com.example.courseapp.data.local.dao.CategoryDao,
+        courseDao: com.example.courseapp.data.local.dao.CourseDao
+    ) = CategoryRepository(api, categoryDao, courseDao)
 }

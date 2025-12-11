@@ -5,29 +5,58 @@ import androidx.lifecycle.viewModelScope
 import com.example.courseapp.data.repository.CategoryRepository
 import com.example.courseapp.domain.models.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class CategoryUiState(val isLoading: Boolean = false, val categories: List<Category> = emptyList(), val error: String? = null)
+data class CategoryUiState(
+    val isLoading: Boolean = true,
+    val categories: List<Category> = emptyList(),
+    val error: String? = null
+)
 
 @HiltViewModel
 class CategoryViewModel @Inject constructor(private val repo: CategoryRepository) : ViewModel() {
-    private val _ui = MutableStateFlow(CategoryUiState())
-    val ui: StateFlow<CategoryUiState> = _ui
 
-    init { load() }
+    private val _isLoading = MutableStateFlow(true)
+    private val _error = MutableStateFlow<String?>(null)
 
-    fun load() {
+    // Observe categories from repository (includes API + local course categories)
+    val ui: StateFlow<CategoryUiState> = combine(
+        repo.observeCategoriesFlow(),
+        _isLoading,
+        _error
+    ) { categories, isLoading, error ->
+        CategoryUiState(
+            isLoading = isLoading,
+            categories = categories,
+            error = error
+        )
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        CategoryUiState(isLoading = true)
+    )
+
+    init {
+        loadFromApi()
+    }
+
+    fun loadFromApi() {
         viewModelScope.launch {
-            _ui.value = _ui.value.copy(isLoading = true, error = null)
+            _isLoading.value = true
+            _error.value = null
             try {
-                val list = repo.getCategories()
-                _ui.value = _ui.value.copy(isLoading = false, categories = list)
+                // This will fetch from API and update the cache
+                // The Flow will automatically emit the updated categories
+                repo.getCategories()
             } catch (e: Exception) {
-                _ui.value = _ui.value.copy(isLoading = false, error = e.localizedMessage ?: "Error")
+                _error.value = e.localizedMessage ?: "Failed to load categories"
+            } finally {
+                _isLoading.value = false
             }
         }
     }
+
+    fun load() = loadFromApi()
 }

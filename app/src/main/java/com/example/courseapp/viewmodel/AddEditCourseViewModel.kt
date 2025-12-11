@@ -68,18 +68,36 @@ class AddEditCourseViewModel @Inject constructor(
             _ui.value = _ui.value.copy(isSaving = true)
             val score = calcScore(title, lessons)
             val now = System.currentTimeMillis()
-            val course = Course(
-                id = existingId ?: UUID.randomUUID().toString(),
-                title = title,
-                description = desc,
-                categoryId = cat,
-                lessons = lessons,
-                score = score,
-                createdAt = now,
-                updatedAt = now
-            )
+
             try {
-                if (existingId == null) courseRepo.addCourse(course) else courseRepo.updateCourse(course)
+                if (existingId == null) {
+                    // Creating new course
+                    val course = Course(
+                        id = UUID.randomUUID().toString(),
+                        title = title,
+                        description = desc,
+                        categoryId = cat,
+                        lessons = lessons,
+                        score = score,
+                        createdAt = now,
+                        updatedAt = null
+                    )
+                    courseRepo.addCourse(course)
+                } else {
+                    // Updating existing course - preserve createdAt
+                    val existing = courseRepo.getCourse(existingId)
+                    val course = Course(
+                        id = existingId,
+                        title = title,
+                        description = desc,
+                        categoryId = cat,
+                        lessons = lessons,
+                        score = score,
+                        createdAt = existing?.createdAt ?: now,
+                        updatedAt = now
+                    )
+                    courseRepo.updateCourse(course)
+                }
                 onSaved()
             } catch (e: Exception) {
                 onError(e.localizedMessage ?: "Failed to save")

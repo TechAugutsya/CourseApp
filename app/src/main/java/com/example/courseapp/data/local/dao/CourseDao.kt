@@ -23,4 +23,10 @@ interface CourseDao {
 
     @Query("DELETE FROM courses WHERE id = :id")
     suspend fun delete(id: String)
+
+    @Query("SELECT DISTINCT categoryId FROM courses ORDER BY categoryId ASC")
+    fun getUniqueCategoriesFlow(): Flow<List<String>>
+
+    @Query("SELECT DISTINCT categoryId FROM courses ORDER BY categoryId ASC")
+    suspend fun getUniqueCategories(): List<String>
 }
