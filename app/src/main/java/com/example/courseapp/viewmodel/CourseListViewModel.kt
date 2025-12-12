@@ -60,7 +60,6 @@ class CourseListViewModel @Inject constructor(
     )
 
     init {
-        // Simulate initial load delay (mimics real-world data fetching)
         viewModelScope.launch {
             delay(500)
             _isInitialLoading.value = false

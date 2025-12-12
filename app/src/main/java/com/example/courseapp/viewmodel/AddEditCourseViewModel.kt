@@ -71,7 +71,6 @@ class AddEditCourseViewModel @Inject constructor(
 
             try {
                 if (existingId == null) {
-                    // Creating new course
                     val course = Course(
                         id = UUID.randomUUID().toString(),
                         title = title,
@@ -84,7 +83,6 @@ class AddEditCourseViewModel @Inject constructor(
                     )
                     courseRepo.addCourse(course)
                 } else {
-                    // Updating existing course - preserve createdAt
                     val existing = courseRepo.getCourse(existingId)
                     val course = Course(
                         id = existingId,

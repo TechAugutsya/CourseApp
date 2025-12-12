@@ -48,7 +48,6 @@ fun CourseListScreen(
                     titleContentColor = MaterialTheme.colorScheme.onPrimary
                 ),
                 actions = {
-                    // Filter button
                     IconButton(onClick = { showFilterSheet = true }) {
                         Text(
                             text = "🔍",
@@ -74,7 +73,6 @@ fun CourseListScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Search bar
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { vm.setQuery(it) },

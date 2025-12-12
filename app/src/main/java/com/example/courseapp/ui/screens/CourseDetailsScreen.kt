@@ -95,7 +95,7 @@ fun CourseDetailsScreen(
             else -> {
                 CourseDetailsContent(
                     course = course!!,
-                    categoryName = course!!.categoryId, // Category ID is now the category name
+                    categoryName = course!!.categoryId,
                     onEdit = { navController.navigate("edit/${course!!.id}") },
                     onDelete = { showDeleteDialog = true },
                     modifier = Modifier
@@ -106,7 +106,6 @@ fun CourseDetailsScreen(
         }
     }
 
-    // Delete Confirmation Dialog
     if (showDeleteDialog && course != null) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
@@ -162,7 +161,6 @@ private fun CourseDetailsContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Score Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -203,7 +201,6 @@ private fun CourseDetailsContent(
             }
         }
 
-        // Title Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -220,12 +217,10 @@ private fun CourseDetailsContent(
             }
         }
 
-        // Info Cards Row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Category Card
             Card(
                 modifier = Modifier.weight(1f),
                 colors = CardDefaults.cardColors(
@@ -258,7 +253,6 @@ private fun CourseDetailsContent(
                 }
             }
 
-            // Lessons Card
             Card(
                 modifier = Modifier.weight(1f),
                 colors = CardDefaults.cardColors(
@@ -291,7 +285,6 @@ private fun CourseDetailsContent(
             }
         }
 
-        // Description Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -314,7 +307,6 @@ private fun CourseDetailsContent(
             }
         }
 
-        // Timestamps
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -368,7 +360,6 @@ private fun CourseDetailsContent(
 
         Spacer(Modifier.height(8.dp))
 
-        // Action Buttons
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)

@@ -86,7 +86,6 @@ fun AddEditCourseScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Title Input
             OutlinedTextField(
                 value = ui.title,
                 onValueChange = vm::setTitle,
@@ -101,7 +100,6 @@ fun AddEditCourseScreen(
                 )
             )
 
-            // Description Input
             OutlinedTextField(
                 value = ui.description,
                 onValueChange = vm::setDescription,
@@ -118,7 +116,6 @@ fun AddEditCourseScreen(
                 )
             )
 
-            // Category Selection
             Column {
                 Text(
                     text = "Category",
@@ -157,7 +154,6 @@ fun AddEditCourseScreen(
                 }
             }
 
-            // Lessons Input
             OutlinedTextField(
                 value = ui.lessons,
                 onValueChange = vm::setLessons,
@@ -173,7 +169,6 @@ fun AddEditCourseScreen(
                 )
             )
 
-            // Custom category input
             OutlinedTextField(
                 value = customCategoryText,
                 onValueChange = { customCategoryText = it },
@@ -199,7 +194,6 @@ fun AddEditCourseScreen(
                 )
             )
 
-            // Score Preview
             if (ui.title.isNotEmpty() && (ui.lessons.toIntOrNull() ?: 0) > 0) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -243,7 +237,6 @@ fun AddEditCourseScreen(
 
             Spacer(Modifier.height(8.dp))
 
-            // Action Buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -284,7 +277,6 @@ fun AddEditCourseScreen(
         }
     }
 
-    // Category Selection Bottom Sheet
     if (showCategorySheet) {
         ModalBottomSheet(
             onDismissRequest = { showCategorySheet = false }
@@ -371,7 +363,6 @@ fun AddEditCourseScreen(
 
                 Spacer(Modifier.height(16.dp))
 
-                // Custom category button
                 OutlinedButton(
                     onClick = {
                         showCategorySheet = false
@@ -387,7 +378,6 @@ fun AddEditCourseScreen(
         }
     }
 
-    // Custom Category Dialog
     if (showCustomCategoryDialog) {
         AlertDialog(
             onDismissRequest = { showCustomCategoryDialog = false },

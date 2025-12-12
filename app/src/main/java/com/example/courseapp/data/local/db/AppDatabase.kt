@@ -38,8 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
     private class DatabaseCallback(private val scope: CoroutineScope) : Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            // No pre-populated data - start with empty database
-            // Data will be fetched from API and stored by user
+
         }
     }
 }

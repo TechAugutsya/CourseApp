@@ -14,6 +14,15 @@ This app allows users to create, manage, and organize courses with features like
 - Full offline functionality with local data persistence
 - Modern Material 3 UI design
 
+
+## 📱 Demo & Download
+
+- **Download APK**: [CourseApp.apk](CourseApp.apk)
+- **Watch Demo**: [AppRecorded.mp4](AppRecorded.mp4)
+
+<video src="AppRecorded.mp4" controls="controls" style="max-width: 100%;">
+</video>
+
 ## ✨ Key Features
 
 ### Course Management
@@ -348,38 +357,6 @@ The app requires the following permissions in `AndroidManifest.xml`:
 - `INTERNET`: For fetching categories from API
 - `ACCESS_NETWORK_STATE`: For checking network connectivity
 
-## 📄 License
-
-This project is created as a demonstration of Android development best practices.
-
-## 🤝 Contributing
-
-This is a demonstration project. For learning purposes, feel free to:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📞 Support
-
-For issues or questions:
-
-1. Check the troubleshooting section above
-2. Review the code comments in source files
-3. Check Logcat for detailed error messages
-4. Verify your development environment setup
-
-## 🎓 Learning Resources
-
-To understand this project better:
-
-- [Jetpack Compose Documentation](https://developer.android.com/jetpack/compose)
-- [Room Database Guide](https://developer.android.com/training/data-storage/room)
-- [Retrofit Documentation](https://square.github.io/retrofit/)
-- [Kotlin Coroutines Guide](https://kotlinlang.org/docs/coroutines-guide.html)
-- [Clean Architecture Principles](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ---
 

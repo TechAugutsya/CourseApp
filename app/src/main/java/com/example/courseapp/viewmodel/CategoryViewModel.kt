@@ -21,7 +21,6 @@ class CategoryViewModel @Inject constructor(private val repo: CategoryRepository
     private val _isLoading = MutableStateFlow(true)
     private val _error = MutableStateFlow<String?>(null)
 
-    // Observe categories from repository (includes API + local course categories)
     val ui: StateFlow<CategoryUiState> = combine(
         repo.observeCategoriesFlow(),
         _isLoading,
@@ -47,8 +46,6 @@ class CategoryViewModel @Inject constructor(private val repo: CategoryRepository
             _isLoading.value = true
             _error.value = null
             try {
-                // This will fetch from API and update the cache
-                // The Flow will automatically emit the updated categories
                 repo.getCategories()
             } catch (e: Exception) {
                 _error.value = e.localizedMessage ?: "Failed to load categories"

@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.courseapp.domain.models.Course
@@ -45,7 +46,6 @@ fun CourseCard(
                     .weight(1f)
                     .padding(end = 12.dp)
             ) {
-                // Title
                 Text(
                     text = course.title,
                     style = MaterialTheme.typography.titleLarge,
@@ -56,7 +56,6 @@ fun CourseCard(
 
                 Spacer(Modifier.height(8.dp))
 
-                // Description
                 Text(
                     text = course.description,
                     style = MaterialTheme.typography.bodyMedium,
@@ -67,12 +66,10 @@ fun CourseCard(
 
                 Spacer(Modifier.height(12.dp))
 
-                // Category and Lessons row
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    // Category chip
                     Surface(
                         shape = RoundedCornerShape(16.dp),
                         color = MaterialTheme.colorScheme.primaryContainer,
@@ -82,11 +79,14 @@ fun CourseCard(
                             text = categoryName ?: "Unknown",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier
+                                .widthIn(max = 150.dp)
+                                .padding(horizontal = 12.dp, vertical = 6.dp)
                         )
                     }
 
-                    // Lessons count
                     Text(
                         text = "📚 ${course.lessons} lessons",
                         style = MaterialTheme.typography.bodySmall,
@@ -95,12 +95,10 @@ fun CourseCard(
                 }
             }
 
-            // Right side: Score and actions
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                // Score display
                 Surface(
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.secondaryContainer,
@@ -114,7 +112,7 @@ fun CourseCard(
                             imageVector = Icons.Filled.Star,
                             contentDescription = null,
                             modifier = Modifier.size(20.dp),
-                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                            tint = Color.Yellow
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
@@ -130,7 +128,6 @@ fun CourseCard(
                     }
                 }
 
-                // Action buttons
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
